@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="icon" type="image/png" href="">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Basic&family=Caprasimo&family=Dancing+Script&family=Fira+Sans:ital,wght@0,400;0,600;1,600&family=Nunito+Sans:ital,wght@0,200;0,300;0,500;0,600;1,300;1,400;1,600&family=Nunito:wght@200&family=PT+Serif&family=Poppins:ital,wght@0,200;0,400;1,100;1,200&family=Roboto+Condensed:ital@1&family=Roboto+Slab:wght@500;600&family=Roboto:ital,wght@0,400;0,700;1,400&family=Schibsted+Grotesk:wght@500&family=Source+Code+Pro:wght@700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+scroll-behavior: smooth;
+scroll-padding-top: 2rem;
+box-sizing: border-box;
+}
+:root{
+    --container-color:#1a1e21 ;
+    --second-color: #fd8f44;
+    --text-color:#172317 ;
+    --bg-color: #fff;
+}
+::selection{
+    color: var(--bg-color);
+    overscroll-behavior-block: var(--second-color);
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+
+}
+img{
+    width: 100%;
+}
+section{
+    padding: 3rem 0 2rem;
+}
+.container{
+    max-width: 1068px;
+    margin: auto;
+    width: 100%;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+}
+header.shadow{
+    background: var(--bg-color);
+    box-shadow: 0 1px 4px hsl(0 4% 14% / 10%);
+    transition: 0.4s;
+
+}
+header.shadow .logo{
+    color: var(--text-color);
+}
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+}
+.logo{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--bg-color);
+}
+.logo span{
+    color: var(--second-color);
+}
+.login{
+    padding: 8px 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 5px;
+    background: var(--second-color);
+    color: var(--bg-color);
+}
+.login:hover{
+    background: hsl(24,98%,58%);
+    transition: 0.3s;
+}
+.home{
+    width: 100%;
+    min-height: 440px;
+    background: var(--container-color);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.home-text{
+    color: var(--bg-color);
+    text-align: center;
+}
+.home-title{
+    font-size: 3.5rem;
+}
+.home-subtitle{
+    font-size: 1rem;
+    font-weight: 400;
+}
+/* post filter */
+
+.post-filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1.5rem;
+    margin-top: 2rem !important;
+}
+.filter-item {
+ font-size: 0.9rem;
+ font-weight: 500;
+ cursor: pointer;
+}
+.active-filter{
+    background: var(--second-color);
+    color: var(--bg-color);
+    padding: 4px 10px;
+    border-radius: 5px;
+
+}
+.post{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+    gap: 1.5rem;
+}
+.post-box{
+    background: var(--bg-color);
+    box-shadow: 0 4px 14px hsl(355deg 25% 15% / 10%);
+    padding: 15px;
+    border-bottom: 0.5rem;
+}
+.post-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+}
+.category{
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--second-color);
+}
+.post-title{
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.post-date{
+    display: flex;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 4px;
+}
+.post-decription{
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    margin: 5px 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+}
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+.profile-img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid var(--second-color);
+}
+.profile-name{
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+.footer p{
+    font-size: 0.938rem;
+
+}
+.social{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+.social .bx{
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+.social .bx:hover{
+    color: var(--second-color);
+    transition: 0.3s all linear;
+}
+
+.post-header{
+    width: 100%;
+    height: 500px;
+    background: var(--container-color);
+}
+.post-container{
+    max-width: 800px;
+    margin: auto;
+    width: 100%;
+}
+.header-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem !important;
+}
+.back-home{
+    color: var(--second-color);
+    font-size: 0.9rem;
+}
+.header-title{
+    width: 90%;
+    font-size: 2.6rem;
+    color: var(--bg-color);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.header-img{
+width: 100%;
+height: 420px;
+object-fit: cover;
+object-position: center;
+}
+.post-content{
+    margin-top: 10rem !important;
+}
+.sub-heading{
+    font-size: 1.2rem;
+}
+.post-text{
+    font-size: 1rem;
+    line-height: 1.7rem;
+    margin: 1rem 0;
+    text-align: justify;
+    row-gap: 1rem;
+}
+.share{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+.share-title{
+    font-size: 1.1rem;
+}
+/* responsive */
+@media(max-width:1060){
+    .container{
+        margin: 0 auto;
+        width: 95%;
+    }
+    .home-text{
+        width: 100%;
+    }
+}
+@media(max-width:800px){
+  .nav{
+    padding: 14px 0;
+  }
+  .post-container{
+    margin:  0 auto;
+    width: 95%;
+  }
+    }
+@media(max-width:768px){
+  .nav{
+    padding: 10px 0;
+  }
+  section{
+    padding: 2rem 0;
+
+  }
+  .header-content{
+    margin-top: 3rem !important;
+  }
+  .home{
+    min-height: 380px;
+  }
+  .home-title{
+    font-size: 3rem;
+  }
+  .header-title{
+    font-size: 2rem;
+  }
+  .header-img{
+    height: 370px;
+  }
+  .post-header{
+    height: 435px;
+  }
+  .post-content{
+    margin-top:  9rem !important;
+  }
+    }
+    @media(max-width: 570px){
+        .post-header{
+            height: 390px;
+        }
+        .header-title{
+            width: 100%;
+        }
+        .header-img{
+            height: 340px;
+        }
+        .footer{
+            flex-direction: column;
+            row-gap: 1rem;
+            padding: 20px 0;
+            text-align: center;
+        }
+    }
+    @media(max-width: 396px){
+        .home-title{
+            font: 2rem;
+        }
+        .home-subtitle{
+            font-size: 0.9rem;
+        }
+        .home{
+            min-height: 300px;
+        }
+        .post-box{
+            padding: 10px;
+        }
+        .header-title{
+            font-size: 1.4rem;
+        }
+        .header-img{
+            height: 240px;
+        }
+        .post-header{
+            height: 335px;
+        }
+        .post-content{
+            margin-top: 5rem !important;
+        }
+        .post-text{
+            font-size: 0.87rem;
+            line-height: 1.5rem;
+            margin: 10px 0;
+            
+        }
+    }
+
+</style>
+<body>
+    <!-- header -->
+<!-- <header>
+ 
+ 
+    <a href="#" class="logo">mY<span>Blog</span></a>
+ 
+    <a href="#" class="login">Login</a>
+</div>
+</header> 
+<!-- home section -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">iCoder 👩🏻‍💻</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about.html">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/blog.html">Blog</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Topics
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Technology</a>
+          <a class="dropdown-item" href="#">Web Development</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Support</a>
+          <a class="dropdown-item" href="#">Write for us</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact.html">Contact Us</a>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" method="post">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+    <div class="mx-2">
+      <button class="btn btn-danger" data-toggle="modal" data-target="#loginModal">
+        Login
+      </button>
+      <button class="btn btn-danger" data-toggle="modal" data-target="#signupModal">
+        SignUp
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="home" id="home">
+    <div class="home-text container">
+        <h2 class="home-title">The Blogging Platform</h2>
+        <span class="home-subtitle">Your source of great content</span>
+    </div>
+
+
+</section>
+
+<!-- post filter -->
+
+<div class="post-filter container">
+    <span class="filter-item active-filter" data-filter="all">All</span>
+    <span class="filter-item" data-filter="Design">Design</span>
+    <span class="filter-item" data-filter="tech">tech</span>
+    <span class="filter-item" data-filter="Mobile">Mobile</span>
+</div>
+<!-- posts -->
+<section class="post container">
+    <!-- post box  1-->
+    <div class="post-box Mobile">
+        <img src="post-1.jpg" alt="" class="post-img">
+        <h2 class="category">Mobile</h2>
+        <a href="post-page.html" class="post-title">
+            How to Create UX Design With Adobe XD
+        </a>
+        <span class="post-date">8 Aug 2023</span>
+        <p class="post-decription">For this mobile project below, the design elements unfolded as many of the user flows were created and approved. This is a good point in the process to begin a design system because enough of the design patterns have been established, such as colors, fonts, icons, navigation elements, and buttons.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-1.jpg" alt="" class="profile-img">
+            <span class="profile-name">Mobile App</span>
+        </div>
+    </div>
+     <!-- post box  2-->
+     <div class="post-box tech">
+        <img src="post-2.jpg" alt="" class="post-img">
+        <h2 class="category">Web devlopment</h2>
+        <a href="post-page.html" class="post-title">
+            How to Createt website Design html css js
+        </a>
+        <span class="post-date">3 Aug 2023</span>
+        <p class="post-decription">Web development refers to the creating, building, and maintaining of websites. It includes aspects such as web design, web publishing, web programming, and database management. It is the creation of an application that works over the internet i.e. websites.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="post-4.jpg" alt="" class="profile-img">
+            <span class="profile-name">Web development</span>
+        </div>
+    </div>
+     <!-- post box  3-->
+     <div class="post-box Mobile">
+        <img src="post-3.jpg" alt="" class="post-img">
+        <h2 class="category">App development</h2>
+        <a href="post-page.html" class="post-title">
+            How to Create  App with java c++ DSA
+        </a>
+        <span class="post-date">7 Aug 2023</span>
+        <p class="post-decription">Welcome to Android Development: Android App Development From Scratch course.
+            Learn java, android, android studio, android development and android app development with Android 11, become a developer
+            
+            Due to its open-source nature</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-2.jpg" alt="" class="profile-img">
+            <span class="profile-name">App development</span>
+        </div>
+    </div>
+     <!-- post box 4 -->
+     <div class="post-box Design">
+        <img src="post-4.jpg" alt="" class="post-img">
+        <h2 class="category">Game development</h2>
+        <a href="post-page.html" class="post-title">
+            How to Create Game with ruby 
+        </a>
+        <span class="post-date">5 Aug 2023</span>
+        <p class="post-decription">Video game development (or gamedev) is the process of developing a video game. The effort is undertaken by a developer, ranging from a single person to an international team dispersed across the globe. Development of traditional commercial PC </p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-3.jpg" alt="" class="profile-img">
+            <span class="profile-name">Game development</span>
+        </div>
+    </div>
+     <!-- post box  5-->
+     <div class="post-box tech">
+        <img src="post-5.jpg" alt="" class="post-img">
+        <h2 class="category">Networking</h2>
+        <a href="post-page.html" class="post-title">
+            How to Createt Networking System
+        </a>
+        <span class="post-date"> 4 Aug 2023</span>
+        <p class="post-decription">A computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-2.jpg" alt="" class="profile-img">
+            <span class="profile-name">Networking</span>
+        </div>
+    </div>
+     <!-- post box  6-->
+     <div class="post-box Mobile">
+        <img src="post-6.jpg" alt="" class="post-img">
+        <h2 class="category">Mobile</h2>
+        <a href="post-page.html" class="post-title">
+            How to Create  UX Design With Adobe XD
+        </a>
+        <span class="post-date">8 Aug 2023</span>
+        <p class="post-decription"> For this mobile project below, the design elements unfolded as many of the user flows were created and approved. This is a good point in the process to begin a design system because enough of the design patterns have been established, such as colors, fonts, icons, navigation elements, and buttons.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-1.jpg" alt="" class="profile-img">
+            <span class="profile-name">Laptop Brown</span>
+        </div>
+    </div>
+     <!-- post box 7 -->
+     <div class="post-box Design">
+        <img src="post-7.jpg" alt="" class="post-img">
+        <h2 class="category">Networking</h2>
+        <a href="post-page.html" class="post-title">
+            How to Create UX Design With Adobe XD
+        </a>
+        <span class="post-date">8 Aug 2023</span>
+        <p class="post-decription">A computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-3.jpg" alt="" class="profile-img">
+            <span class="profile-name">Laptop Brown</span>
+        </div>
+    </div>
+     <!-- post box  8-->
+     <div class="post-box tech">
+        <img src="post-8.jpg" alt="" class="post-img">
+        <h2 class="category">website</h2>
+        <a href="post-page.html" class="post-title">
+            How to Createt UX Design With Adobe XD
+        </a>
+        <span class="post-date">8 Aug 2023</span>
+        <p class="post-decription">Web development refers to the creating, building, and maintaining of websites. It includes aspects such as web design, web publishing, web programming, and database management. It is the creation of an application that works over the internet i.e. websites.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-1.jpg" alt="" class="profile-img">
+            <span class="profile-name">Laptop Brown</span>
+        </div>
+    </div>
+     <!-- post box  9-->
+     <div class="post-box Design">
+        <img src="post-9.jpg" alt="" class="post-img">
+        <h2 class="category">   Website</h2>
+        <a href="post-page.html" class="post-title">
+            How to Create  UX Design With Adobe XD
+        </a>
+        <span class="post-date">8 Aug 2023</span>
+        <p class="post-decription">Web development refers to the creating, building, and maintaining of websites. It includes aspects such as web design, web publishing, web programming, and database management. It is the creation of an application that works over the internet i.e. websites.</p>
+        <!-- profile -->
+        <div class="profile">
+            <img src="profile-3.jpg" alt="" class="profile-img">
+            <span class="profile-name">Laptop Brown</span>
+        </div>
+    </div>
+</section>
+<!-- footer -->
+<div class="footer container">
+    <p>&#169; Carpoolvenom All Right Reserved</p>
+    <div class="social">
+        <a href="#"><box-icon type='logo' class='bx facebook-circle'></box-icon></a>
+        <a href="#"><box-icon type='logo' class='bx twitter-circle'></box-icon></a>
+        <a href="#"><box-icon type='logo' class='bx instagram-circle'></box-icon></a>
+    </div>
+</div>
+
+
+<!-- jquery link -->
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+</html>
+</body>
+</html>
